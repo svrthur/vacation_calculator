@@ -3,17 +3,19 @@ package ru.netology.services;
 public class VacationCalculator {
 
     public int calculateVacationMonths(int income, int expenses, int threshold) {
-        int money = 0;
-        int vacationMonths = 0;
+        int money = 0; // Изначально денег нет
+        int vacationMonths = 0; // Счётчик месяцев отдыха
 
-        for (int month = 0; month < 12; month++) {
+        for (int month = 1; month <= 12; month++) {
+            // Если денег достаточно для отдыха
             if (money >= threshold) {
-                // Если накоплено достаточно денег для отпуска, уменьшаем накопления и увеличиваем счетчик отпусков
-                money -= threshold;
-                vacationMonths++;
+                vacationMonths++; // Увеличиваем счётчик месяцев отдыха
+                money -= expenses; // Уменьшаем деньги на расходы
+                money /= 3; // Уменьшаем оставшиеся деньги в три раза
             } else {
-                // Иначе прибавляем разницу между доходом и расходами
-                money += (income - expenses);
+                // Если денег недостаточно, работаем
+                money += income; // Добавляем доход
+                money -= expenses; // Уменьшаем деньги на расходы
             }
         }
 
